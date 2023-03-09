@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="home.js"></script>
+    <link rel="stylesheet" href="./style/StyleSheet.css" />
+
+</head>
+<body onload="displayUserName()">
+    
+    <div id="displayUserName" ></div>
+    <a onclick="visibleUpdate()">עדכון פרטים</a>
+    <!--<img src="./v.jpg"/>-->
+    <div id="updateUser" style="visibility:hidden">
+        <h4>עדכון פרטים</h4>
+
+
+        <label for="emailUpdate">שם משתמש </label>
+        <input id="emailUpdate" type="text" placeholder="email" />
+        <br />
+        <label for="passwordUpdate">סיסמה </label>
+        <input id="passwordUpdate" type="password" placeholder="password" />
+        <br />
+        <label for="firstNameUpdate">שם פרטי </label>
+        <input id="firstNameUpdate" type="text" placeholder="first name" />
+        <br />
+
+        <label for="lastNameUpdate">שם משפחה </label>
+        <input id="lastNameUpdate" type="text" placeholder="last name" />
+
+        <button onclick="update()">עדכון</button>
+    </div>
+
+</body>
+</html>
