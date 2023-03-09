@@ -29,6 +29,7 @@ const signIn = async () => {
             }
         }
     );
+    console.log(user.status)
     if (user.status == 200) {
         await signInSucceeded(user); 
     }

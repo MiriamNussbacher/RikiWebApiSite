@@ -5,8 +5,8 @@ namespace Repositories
 {
     public class UsersRepository
     {
-         string filePath = "M:/webApi/ShopSite/Repositories/users.txt";
-       
+         string filePath = "E:/web/update-web/ShopSite/Repositories/users.txt";
+        //"M:/webApi/ShopSite/Repositories/users.txt"
         public async Task<User> getUsersById(int id)
         { 
             using (StreamReader reader = System.IO.File.OpenText(filePath))
