@@ -8,18 +8,18 @@ namespace Services
     public class UsersService
     {
         UsersRepository usersRepository=new UsersRepository();
-        public User getUsersById(int id)
+        public async Task<User> getUsersById(int id)
         {
-            return usersRepository.getUsersById(id); 
+            return await usersRepository.getUsersById(id); 
         }
 
 
-         public User getUserByEmailAndPassword(User userFromBody)
+         public async Task<User> getUserByEmailAndPassword(User userFromBody)
         {
-            return usersRepository.getUserByEmailAndPassword(userFromBody);
+            return await usersRepository.getUserByEmailAndPassword(userFromBody);
         }
 
-        public User createUser(User user)
+        public async Task<User> createUser(User user)
 
         {
             var resultPassword = Zxcvbn.Core.EvaluatePassword(user.Password);
@@ -27,12 +27,12 @@ namespace Services
             {
                 return null; 
             }
-            return usersRepository.createUser(user);
+            return await usersRepository.createUser(user);
         }
 
-        public User updateUser(int id, User userToUpdate)
+        public async Task<User> updateUser(int id, User userToUpdate)
         {
-            return usersRepository.updateUser(id, userToUpdate);
+            return await usersRepository.updateUser(id, userToUpdate);
 
         }
 

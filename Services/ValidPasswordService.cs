@@ -10,10 +10,10 @@ namespace Services
 {
     public class ValidPasswordService
     {
-        public int scoreStrenghPassword(string password)
+        public  int scoreStrenghPassword(string password)
         {
 
-            return Zxcvbn.Core.EvaluatePassword(password).Score;
+            return  Zxcvbn.Core.EvaluatePassword(password).Score;
             
         }
 
