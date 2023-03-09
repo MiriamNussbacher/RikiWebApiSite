@@ -7,12 +7,12 @@ namespace Repositories
     {
          string filePath = "M:/webApi/ShopSite/Repositories/users.txt";
        
-        public User getUsersById(int id)
+        public async Task<User> getUsersById(int id)
         { 
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string? currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
                     User user = JsonSerializer.Deserialize<User>(currentUserInFile);
                     if (user.UserId == id)
@@ -54,13 +54,13 @@ namespace Repositories
         }
 
 
-        public User updateUser(int id,User userToUpdate)
+        public async Task<User> updateUser(int id,User userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string currentUserInFile;
-                while ((currentUserInFile = reader.ReadLine()) != null)
+                while ((currentUserInFile =await reader.ReadLineAsync()) != null)
                 {
 
                     User user = JsonSerializer.Deserialize<User>(currentUserInFile);
