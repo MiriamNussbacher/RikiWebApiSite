@@ -3,12 +3,12 @@ using System.Text.Json;
 
 namespace Repositories
 {
-    public class UsersRepository
+    public class UsersRepository : IUsersRepository
     {
-         string filePath = "E:/web/update-web/ShopSite/Repositories/users.txt";
-        //"M:/webApi/ShopSite/Repositories/users.txt"
+        string filePath = "M:/webApi/ShopSite/Repositories/users.txt";
+        //"E:/web/update-web/ShopSite/Repositories/users.txt";
         public async Task<User> getUsersById(int id)
-        { 
+        {
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string? currentUserInFile;
@@ -16,7 +16,7 @@ namespace Repositories
                 {
                     User user = JsonSerializer.Deserialize<User>(currentUserInFile);
                     if (user.UserId == id)
-                        return user; 
+                        return user;
                 }
             }
             return null;
@@ -28,7 +28,7 @@ namespace Repositories
 
         public async Task<User> getUserByEmailAndPassword(User userFromBody)
         {
-        //"M:\\webApi\\ShopSite\\Repositories\\
+            //"M:\\webApi\\ShopSite\\Repositories\\
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string? currentUserInFile;
@@ -39,7 +39,7 @@ namespace Repositories
                         return user;
                 }
             }
-            return null; 
+            return null;
 
         }
 
@@ -50,17 +50,17 @@ namespace Repositories
             user.UserId = numberOfUsers + 1;
             string userJson = JsonSerializer.Serialize(user);
             await System.IO.File.AppendAllTextAsync(filePath, userJson + Environment.NewLine);
-            return user; 
+            return user;
         }
 
 
-        public async Task<User> updateUser(int id,User userToUpdate)
+        public async Task<User> updateUser(int id, User userToUpdate)
         {
             string textToReplace = string.Empty;
             using (StreamReader reader = System.IO.File.OpenText(filePath))
             {
                 string currentUserInFile;
-                while ((currentUserInFile =await reader.ReadLineAsync()) != null)
+                while ((currentUserInFile = await reader.ReadLineAsync()) != null)
                 {
 
                     User user = JsonSerializer.Deserialize<User>(currentUserInFile);
@@ -71,13 +71,13 @@ namespace Repositories
 
             if (textToReplace != string.Empty)
             {
-                string text =await System.IO.File.ReadAllTextAsync(filePath);
+                string text = await System.IO.File.ReadAllTextAsync(filePath);
                 text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
                 await System.IO.File.WriteAllTextAsync(filePath, text);
                 return userToUpdate;
             }
 
-            return null; 
+            return null;
         }
 
 

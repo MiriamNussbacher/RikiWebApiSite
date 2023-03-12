@@ -65,6 +65,9 @@ const signUp = async () => {
             }
         }
     );
+
+    const responseText = await user.text();
+
     if (user.status == 201) {
         const userToJson = await user.json();
         saveUserInSessionStorage(userToJson);
@@ -72,9 +75,15 @@ const signUp = async () => {
 
     }
 
-    if (user.status == 400) {
-        alert('requierd fields')
+    if (user.status == 400 && responseText == "Password isn't strong") {
+        alert("Password isn't strong");
     }
+    else {
+        if (user.status == 400) {
+            alert('requierd fields')
+        }
+    }
+   
 
 }
 

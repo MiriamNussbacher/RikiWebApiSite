@@ -12,12 +12,16 @@ namespace ShopSite.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        UsersService usersService = new UsersService();
+        IUsersService _usersService;
+        public UsersController(IUsersService usersService)
+        {
+            _usersService = usersService;
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-           User user =await usersService.getUsersById(id); 
+           User user =await _usersService.getUsersById(id); 
            
            return user!=null ? Ok(user): BadRequest("User didn't found");
 
@@ -30,7 +34,7 @@ namespace ShopSite.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> loginByEmailAndPassword([FromBody] User userFromBody)
         {
-            User user = await usersService.getUserByEmailAndPassword(userFromBody);
+            User user = await _usersService.getUserByEmailAndPassword(userFromBody);
             return user != null ? Ok(user) : Unauthorized();
         }
 
@@ -40,15 +44,15 @@ namespace ShopSite.Controllers
         public async Task<ActionResult<User>> Post([FromBody] User userFromBody)
         {
            
-            User user = await usersService.createUser(userFromBody);
-            return user == null ? BadRequest("Password isn't strong!"): CreatedAtAction(nameof(Post), new { id = user.UserId }, user);
+            User user = await _usersService.createUser(userFromBody);
+            return user == null ? BadRequest("Password isn't strong"): CreatedAtAction(nameof(Post), new { id = user.UserId }, user);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> Put(int id, [FromBody] User userToUdate)
         {
-            User user =await usersService.updateUser(id, userToUdate);
+            User user =await _usersService.updateUser(id, userToUdate);
 
             return user != null ? Ok(user) : BadRequest("User didn't found");
 
