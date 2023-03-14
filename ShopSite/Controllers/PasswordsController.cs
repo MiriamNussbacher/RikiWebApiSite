@@ -9,14 +9,19 @@ namespace ShopSite.Controllers
     [ApiController]
     public class PasswordsController : ControllerBase
     {
+        
+        IValidPasswordService _validPasswordService;
+        public PasswordsController(IValidPasswordService validPasswordService)
+        {
+            _validPasswordService = validPasswordService;
+        }
 
-        ValidPasswordService validPasswordService = new();
 
         // POST api/<PasswordsController>
         [HttpPost]
         public ActionResult<int> Post([FromBody] string password)
         {
-            return validPasswordService.scoreStrenghPassword(password);
+            return _validPasswordService.scoreStrenghPassword(password);
 
         }
 
