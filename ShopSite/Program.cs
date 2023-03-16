@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Services;
 
@@ -10,7 +11,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 builder.Services.AddTransient<IUsersService, UsersService>();
-
+builder.Services.AddTransient<IValidPasswordService, ValidPasswordService>();
+builder.Services.AddDbContext<ShopDbContext>(option => option.UseSqlServer("Data Source=SRV2\\PUPILS;Integrated Security=True"));
 
 var app = builder.Build();
 

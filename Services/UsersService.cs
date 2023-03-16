@@ -32,7 +32,8 @@ namespace Services
             {
                 return null;
             }
-            return await _usersRepository.createUser(user);
+              return await _usersRepository.createUser(user);
+          
         }
 
         public async Task<User> updateUser(int id, User userToUpdate)

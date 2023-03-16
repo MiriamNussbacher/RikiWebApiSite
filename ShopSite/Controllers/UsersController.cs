@@ -21,9 +21,9 @@ namespace ShopSite.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-           User user =await _usersService.getUsersById(id); 
-           
-           return user!=null ? Ok(user): BadRequest("User didn't found");
+            User user = await _usersService.getUsersById(id);
+
+            return user!=null ? Ok(user): BadRequest("User didn't found");
 
         }
 
@@ -45,7 +45,7 @@ namespace ShopSite.Controllers
         {
            
             User user = await _usersService.createUser(userFromBody);
-            return user == null ? BadRequest("Password isn't strong"): CreatedAtAction(nameof(Post), new { id = user.UserId }, user);
+            return user == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = user.UserId }, user);
         }
 
         // PUT api/<UsersController>/5

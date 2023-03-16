@@ -21,6 +21,7 @@ namespace ShopSite.Controllers
         [HttpPost]
         public ActionResult<int> Post([FromBody] string password)
         {
+            
             return _validPasswordService.scoreStrenghPassword(password);
 
         }

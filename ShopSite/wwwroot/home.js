@@ -65,7 +65,8 @@ const signUp = async () => {
             }
         }
     );
-
+    console.log(user);
+    debugger;
     const responseText = await user.text();
 
     if (user.status == 201) {
@@ -140,8 +141,7 @@ const visibleUpdate = () => {
 }
 
 
-const checkStrenghPassword = async() => {
-
+const checkStrenghPassword = async () => {
     const password = document.getElementById("passwordSignUp").value;
     const response = await fetch(`api/passwords`, {
         method: 'POST',
