@@ -49,7 +49,7 @@ const createUserToSignUp = () => {
     const password = document.getElementById("passwordSignUp").value;
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
-    return JSON.stringify({ FirstName: firstName, LastName: lastName, Password: password, Email: email });
+    return JSON.stringify({ firstName: firstName, lastName: lastName, password: password, email: email });
 
 }
 
@@ -67,7 +67,7 @@ const signUp = async () => {
     );
     console.log(user);
     debugger;
-    const responseText = await user.text();
+    //const responseText = await user.text();
 
     if (user.status == 201) {
         const userToJson = await user.json();
@@ -76,7 +76,8 @@ const signUp = async () => {
 
     }
 
-    if (user.status == 400 && responseText == "Password isn't strong") {
+    if (user.status == 400/* && responseText == "Password isn't strong"*/) {
+        //const aaa = await user.text();
         alert("Password isn't strong");
     }
     else {
@@ -101,7 +102,7 @@ const createUserToUpdate = () => {
     const password = document.getElementById("passwordUpdate").value;
     const firstName = document.getElementById("firstNameUpdate").value;
     const lastName = document.getElementById("lastNameUpdate").value;
-    return JSON.stringify({ FirstName: firstName, LastName: lastName, Password: password, Email: email });
+    return JSON.stringify({ firstName: firstName, lastName: lastName, password: password, email: email });
 
 }
 

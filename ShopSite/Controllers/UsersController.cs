@@ -45,7 +45,7 @@ namespace ShopSite.Controllers
         {
            
             User user = await _usersService.createUser(userFromBody);
-            return user == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = user.UserId }, user);
+            return user == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = user.Id }, user);
         }
 
         // PUT api/<UsersController>/5

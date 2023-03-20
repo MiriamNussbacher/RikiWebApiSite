@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Entities;
 
-namespace Repositories;
+namespace Entities;
 
 public partial class ShopDbContext : DbContext
 {
