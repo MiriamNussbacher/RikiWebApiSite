@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Services;
-using Entities; 
+using Entities;
+using AutoMapper;
+using DTO; 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+ 
 namespace ShopSite.Controllers
 {
 
@@ -13,56 +15,52 @@ namespace ShopSite.Controllers
     public class UsersController : ControllerBase
     {
         IUsersService _usersService;
-        public UsersController(IUsersService usersService)
+        IMapper _mapper; 
+        public UsersController(IUsersService usersService,IMapper mapper)
         {
             _usersService = usersService;
+            _mapper = mapper;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
+        public async Task<ActionResult<UserDTO>> Get(int id)
         {
             User user = await _usersService.getUsersById(id);
-
-            return user!=null ? Ok(user): BadRequest("User didn't found");
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(user);
+            return userDTO != null ? Ok(userDTO) : BadRequest("User didn't found");
 
         }
 
-        // GET api/<UsersController>/5
-        //[HttpGet()]
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<User>> loginByEmailAndPassword([FromBody] User userFromBody)
+        public async Task<ActionResult<UserDTO>> loginByEmailAndPassword([FromBody] UserDTO userFromBody)
         {
-            User user = await _usersService.getUserByEmailAndPassword(userFromBody);
-            return user != null ? Ok(user) : Unauthorized();
+            User user = _mapper.Map<UserDTO, User>(userFromBody);
+            User userLogin = await _usersService.getUserByEmailAndPassword(user);
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(userLogin);
+            return userDTO != null ? Ok(userDTO) : Unauthorized();
         }
-
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<ActionResult<User>> Post([FromBody] User userFromBody)
+        public async Task<ActionResult<UserDTO>> Post([FromBody] UserDTO userFromBody)
         {
-           
-            User user = await _usersService.createUser(userFromBody);
-            return user == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = user.Id }, user);
+            User user = _mapper.Map<UserDTO, User>(userFromBody);
+            User userCreated = await _usersService.createUser(user);
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(userCreated);
+            return userDTO == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = userDTO.Id }, userDTO);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<User>> Put(int id, [FromBody] User userToUdate)
+        public async Task<ActionResult<UserDTO>> Put(int id, [FromBody] UserDTO userToUdate)
         {
-            User user =await _usersService.updateUser(id, userToUdate);
-
-            return user != null ? Ok(user) : BadRequest("User didn't found");
-
+            User user = _mapper.Map<UserDTO, User>(userToUdate);
+            User userUdated =await _usersService.updateUser(id, user);
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(userUdated); 
+            return userDTO != null ? Ok(userDTO) : BadRequest("User didn't found");
         }    
     
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -1,4 +1,10 @@
-﻿
+﻿const displayProducts = () => {
+    window.location.href = "products.html";
+
+}
+
+
+
 
 const saveUserInSessionStorage = (data) => {
     sessionStorage.setItem('CurrentUser', JSON.stringify(data));

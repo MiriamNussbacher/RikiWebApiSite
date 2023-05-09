@@ -17,7 +17,7 @@ namespace Services
             _productRepository = productRepository;
         }
 
-        public async Task<List<Product>> getAllProducts(string name, List<int> categoriesId, string description, int minPrice, int maxPrice)
+        public async Task<List<Product>> getAllProducts(string? name, List<int> categoriesId, string? description, int? minPrice, int? maxPrice)
         {
             return await _productRepository.getAllProducts(name,categoriesId,description,minPrice,maxPrice);
         }

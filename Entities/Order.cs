@@ -13,8 +13,8 @@ public partial class Order
 
     public DateTime? Date { get; set; }
 
-    public virtual ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
-    public virtual User? User { get; set; }
+    public virtual User? User { get; }
 }
                                                                                                                                                                                                                                                                                                 

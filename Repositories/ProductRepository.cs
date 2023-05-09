@@ -18,9 +18,17 @@ namespace Repositories
 
         }
 
-        public async Task<List<Product>> getAllProducts(string name, List<int> categoriesId, string description, int minPrice, int maxPrice)
-        { 
-            return await _shopDbContext.Products.Include(product=>product.Category).ToListAsync();
+        public async Task<List<Product>> getAllProducts(string? name, List<int> categoriesId, string? description, int? minPrice, int? maxPrice)
+        {
+            return await _shopDbContext.Products.Include(product => product.Category)
+                .Where(product =>
+                (name == null ? (true) : product.Name.Contains(name)) &&
+                (categoriesId.Count()<=0 ? (true) : categoriesId.Contains(product.Category.CategoryId)) &&
+                (description == null ? (true) : product.Description.Contains(description)) &&
+                (minPrice == null ? (true) : product.Price >= minPrice) &&
+                (maxPrice == null ? (true) : product.Price <= maxPrice))
+                .OrderBy(product => product.Price)
+                .ToListAsync();
         }
 
         public async Task<Product> getProductById(int id)

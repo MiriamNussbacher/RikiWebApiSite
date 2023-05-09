@@ -27,6 +27,7 @@ builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
 
 builder.Services.AddDbContext<ShopDbContext>(option => option.UseSqlServer("Data Source=SRV2\\PUPILS;Integrated Security=True"));
 
