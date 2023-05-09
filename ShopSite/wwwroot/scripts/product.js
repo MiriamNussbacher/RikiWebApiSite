@@ -2,9 +2,6 @@
 const addToCart = (product) => {
 
 
-
-
-
     var oldCart = JSON.parse(localStorage.getItem('cart'));//arr of products
     if (oldCart == null) localStorage.setItem('cart', JSON.stringify([{ ...product, 'count': 1 }]))
     else {
@@ -18,9 +15,8 @@ const addToCart = (product) => {
         localStorage.setItem('cart', JSON.stringify(oldCart))
 
     }
-
-
-
+    var count = document.getElementById('ItemsCountText')
+    count.innerText = parseInt(count.innerText)+1
 }
 
 
