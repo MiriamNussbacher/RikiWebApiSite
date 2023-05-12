@@ -15,8 +15,7 @@ const addToCart = (product) => {
         localStorage.setItem('cart', JSON.stringify(oldCart))
 
     }
-    var count = document.getElementById('ItemsCountText')
-    count.innerText = parseInt(count.innerText)+1
+    counterCartProducts();
 }
 
 
@@ -99,15 +98,17 @@ function cleanScreen() {
     document.getElementById('ProductList').innerText=''
 }
 
+const counterCartProducts = () => {
+    var oldCart = JSON.parse(localStorage.getItem('cart'));//arr of products
+    const counter = oldCart.reduce((sum, product) => { return sum + product.count }, 0)
+    document.getElementById('ItemsCountText').innerText = counter; 
+}
+
 function loadPage() {
 
     window.addEventListener("load", (e)=>loadProducts());
-    window.addEventListener("load", (e) => loadCategories());
-    
-
-
-
-
+    window.addEventListener("load", loadCategories);
+    window.addEventListener("load",counterCartProducts)
 }
 
 

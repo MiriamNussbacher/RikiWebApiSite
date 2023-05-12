@@ -18,7 +18,6 @@ namespace DTO
         public DateTime? Date { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-
         
     }
 }

@@ -18,6 +18,8 @@ namespace Services
 
         public async Task<Order> createOrder(Order newOrder)
         {
+
+            newOrder.Date = new DateTime();
             return await _orderRepository.createOrder(newOrder);
         }
 
