@@ -62,7 +62,7 @@ const drowCategories = (categories) => {
         clone.querySelector(".opt").id = `${category.categoryId}`;
         clone.querySelector(".opt").addEventListener('click', filterProducts);
 
-        document.getElementById("categoryList").appendChild(clone);
+        document.getElementById("categoryList").appendChild(clone); 
 
     })
 }
@@ -83,11 +83,11 @@ const loadCategories = async () => {
 
 const filterProducts = () => {
     var name = document.getElementById('nameSearch').value;
-    name ? name = `name=${name}`: name=''
+    name ? name = `name=${name}&`: name=''
     var minPrice = document.getElementById('minPrice').value;
-    minPrice ? minPrice = `minPrice=${minPrice}` : minPrice=''
+    minPrice ? minPrice = `minPrice=${minPrice}&` : minPrice=''
     var maxPrice = document.getElementById('maxPrice').value;
-    maxPrice ? maxPrice = `maxPrice=${maxPrice}` : maxPrice = ''
+    maxPrice ? maxPrice = `maxPrice=${maxPrice}&` : maxPrice = ''
 
     const categoriesId = Array.from(document.getElementsByClassName("opt")).filter(category => category.checked).map(category => `categoriesId=${category.id}&`).join('') || '';
     const queryParamsUrl = `?${categoriesId}${name}${minPrice}${maxPrice}`

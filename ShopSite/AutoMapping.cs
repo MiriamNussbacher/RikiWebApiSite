@@ -13,8 +13,13 @@ namespace ShopSite
                 opts => opts.MapFrom(src => src.Category.Name));
             CreateMap<ProductDTO, Product>();
             CreateMap<Category, CategoryDTO>().ReverseMap();
+           
             CreateMap<Order, OrderDTO>().ReverseMap();
+
+
             CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
+            //.ForMember(dest => dest.ProductId,
+            // opts => opts.MapFrom(src => src.Product.ProductId)).ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
         }
     }

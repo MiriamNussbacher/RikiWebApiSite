@@ -20,9 +20,11 @@ const drawCart = () => {
     }
     productAmountAndPrice(cart);
 }
+
 const productAmountAndPrice = (cart) => {
-    const itemCount = cart.reduce((count, product) => { return count + product.count }, 0)
-    const totalSum = cart.reduce((sum, product) => { return sum + product.count * product.price }, 0)
+    
+    const itemCount = cart?.reduce((count, product) => { return count + product.count }, 0) || 0; 
+    const totalSum = cart?.reduce((sum, product) => { return sum + product.count * product.price }, 0) || 0; 
 
     document.getElementById("totalAmount").innerText = totalSum;
     document.getElementById("itemCount").innerText = itemCount;
@@ -39,9 +41,17 @@ const productAmountAndPrice = (cart) => {
 
     }
 
-    function cleanScreen() {
-        document.getElementsByTagName("tbody")[0].innerText = '';
-    }
+function cleanScreen() {
+    document.getElementsByTagName("tbody")[0].innerText = '';
+
+}
+
+function cleanCart() {
+    document.getElementById("totalAmount").innerText= 0
+document.getElementById("itemCount").innerText = 0
+    localStorage.removeItem('cart');
+    cleanScreen();
+}
 
 
 
@@ -50,15 +60,20 @@ const productAmountAndPrice = (cart) => {
 
 const placeOrder = async() => { 
     const cart = JSON.parse(localStorage.getItem('cart'));//arr of products
-    const orderItems = cart.map(product => { return { 'productId': product.productId, 'quantity': product.count } })
-    const userId = JSON.parse(sessionStorage.getItem('user'))?.id
+
+    const orderItems = cart.map(product => { return { 'ProductId': product.productId, 'Quantity': product.count } })
+
+    const userId = JSON.parse(sessionStorage.getItem('CurrentUser'))?.id
+
     const orderSum = cart.reduce((sum, product) => { return sum + product.count * product.price }, 0); 
+
     const orderBody = { 'UserId': userId, 'OrderSum': orderSum, 'OrderItems': orderItems }
 
+    if (!userId) alert(`You must sign in in order to place your order`)
     const response = await fetch(`api/orders`,
         {
             method: 'POST',
-            body: orderBody,
+            body: JSON.stringify(orderBody),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -67,7 +82,7 @@ const placeOrder = async() => {
     if (response.status == 201) {
         const order= await response.json();
         alert(`Your order #${order.orderId} has been successfully placed `)
-
+        cleanCart()
     }
 
 

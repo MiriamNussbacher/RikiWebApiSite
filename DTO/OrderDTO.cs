@@ -15,9 +15,9 @@ namespace DTO
 
         public decimal? OrderSum { get; set; }
 
-        public DateTime? Date { get; set; }
+        //public DateTime? Date { get; set; }
 
-        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public virtual ICollection<OrderItemDTO>? OrderItems { get; set; } = new List<OrderItemDTO>();
         
     }
 }

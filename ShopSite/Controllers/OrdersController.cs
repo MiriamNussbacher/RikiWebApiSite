@@ -36,7 +36,7 @@ namespace ShopSite.Controllers
             Order order = _mapper.Map<OrderDTO, Order>(orderFromBody); 
             Order orderCreated = await _orderService.createOrder(order);
             OrderDTO orderDTO = _mapper.Map<Order, OrderDTO>(orderCreated);
-            return CreatedAtAction(nameof(Get), new { OrderId = orderDTO.OrderId }, orderDTO);
+            return CreatedAtAction(nameof(Post), new { OrderId = orderDTO.OrderId }, orderDTO);
         }
 
     }

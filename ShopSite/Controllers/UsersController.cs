@@ -15,11 +15,13 @@ namespace ShopSite.Controllers
     public class UsersController : ControllerBase
     {
         IUsersService _usersService;
-        IMapper _mapper; 
-        public UsersController(IUsersService usersService,IMapper mapper)
+        IMapper _mapper;
+        ILogger<UsersController> _logger; 
+        public UsersController(IUsersService usersService,IMapper mapper,ILogger<UsersController> logger)
         {
             _usersService = usersService;
             _mapper = mapper;
+            _logger = logger; 
         }
 
         [HttpGet("{id}")]
@@ -31,7 +33,11 @@ namespace ShopSite.Controllers
 
         }
 
-
+        private void loggerUserInfo(UserDTO userDTO, string action)
+        {
+            if (userDTO != null) _logger.LogInformation($"User {userDTO.Email} {action} at {DateTime.UtcNow.ToLongTimeString()}");
+            else _logger.LogInformation($"User {userDTO.Email} tried to {action} at {DateTime.UtcNow.ToLongTimeString()} and failed");
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> loginByEmailAndPassword([FromBody] UserDTO userFromBody)
@@ -39,7 +45,8 @@ namespace ShopSite.Controllers
             User user = _mapper.Map<UserDTO, User>(userFromBody);
             User userLogin = await _usersService.getUserByEmailAndPassword(user);
             UserDTO userDTO = _mapper.Map<User, UserDTO>(userLogin);
-            return userDTO != null ? Ok(userDTO) : Unauthorized();
+            loggerUserInfo(userDTO,"login");
+            return userDTO != null ? Ok(userDTO) : Unauthorized(); 
         }
 
         // POST api/<UsersController>
@@ -49,6 +56,7 @@ namespace ShopSite.Controllers
             User user = _mapper.Map<UserDTO, User>(userFromBody);
             User userCreated = await _usersService.createUser(user);
             UserDTO userDTO = _mapper.Map<User, UserDTO>(userCreated);
+            loggerUserInfo(userDTO, "register");
             return userDTO == null ? BadRequest("Password isn't strong") : CreatedAtAction(nameof(Post), new { id = userDTO.Id }, userDTO);
         }
 
@@ -58,7 +66,8 @@ namespace ShopSite.Controllers
         {
             User user = _mapper.Map<UserDTO, User>(userToUdate);
             User userUdated =await _usersService.updateUser(id, user);
-            UserDTO userDTO = _mapper.Map<User, UserDTO>(userUdated); 
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(userUdated);
+            loggerUserInfo(userDTO, "update");
             return userDTO != null ? Ok(userDTO) : BadRequest("User didn't found");
         }    
     

@@ -1,9 +1,9 @@
-﻿const displayProducts = () => {
+﻿
+
+const displayProducts = () => {
     window.location.href = "products.html";
 
 }
-
-
 
 
 const saveUserInSessionStorage = (data) => {
