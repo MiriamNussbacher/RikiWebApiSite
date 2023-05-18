@@ -8,6 +8,7 @@ AutoMapper for object mapping and Config files for easy configuration management
 The client and the server-side have validation for security and Password strength check for Enhanced security.
 The project is built in layers, layers are divided into controllers, services, and repositories, 
 the Communication between the layers is conducted by dependency injection.
+
 DTO-Data Transfer Object, for preventing circular dependency and encapsulation between layers.
 Asynchronous programming with async await for scalability
 For error handling support there is a middleware that catch and handle the errors.
