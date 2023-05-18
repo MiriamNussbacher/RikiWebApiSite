@@ -72,7 +72,15 @@ namespace Repositories
 
         public async Task<User> updateUser(int id, User userToUpdate)
         {
-             _shopDbContext.Users.Update(userToUpdate);
+            //User user = await _shopDbContext.Users.FindAsync(id);
+            //if (user != null)
+            //{
+            //    _shopDbContext.Entry(user).CurrentValues.SetValues(userToUpdate);
+            //    await _shopDbContext.SaveChangesAsync();
+            //    return userToUpdate;
+            //}
+            //return null;
+            _shopDbContext.Users.Update(userToUpdate);
             await _shopDbContext.SaveChangesAsync();
             return userToUpdate;
         }

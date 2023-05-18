@@ -24,7 +24,6 @@ const createUserJsonToSendSignIn = () => {
 };
 
 const signIn = async () => {
-    //const user = await fetch(`api/users?email=${email}&password=${password}`);
     const userToSend = createUserJsonToSendSignIn();
     const user = await fetch(`api/users/login`,
         {
@@ -73,7 +72,6 @@ const signUp = async () => {
     );
     console.log(response);
     debugger;
-    //const responseText = await user.text();
 
     if (response.status == 201) {
         const userToJson = await response.json();
@@ -91,7 +89,7 @@ const signUp = async () => {
 const displayUserName = () => {
     
     const divName = document.getElementById("displayUserName");
-    divName.innerHTML = `שלום ${JSON.parse(sessionStorage.getItem('CurrentUser')).firstName}`; 
+    divName.innerHTML = `Hi, ${JSON.parse(sessionStorage.getItem('CurrentUser')).firstName}`; 
 
 }
 
@@ -106,8 +104,9 @@ const createUserToUpdate = () => {
 }
 
 const update = async () => {
-    const userToUpdate = createUserToUpdate(); //JSON.stringify({ FirstName: firstName, LastName: lastName, Password: password, Email: email });
-    const id = JSON.parse(sessionStorage.getItem('CurrentUser')).userId;
+    const userToUpdate = createUserToUpdate(); 
+    const id = JSON.parse(sessionStorage.getItem('CurrentUser')).id;
+    debugger;
     const user = await fetch(`api/users/${id}`,
         {
             method: 'PUT',
