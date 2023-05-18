@@ -62,7 +62,7 @@ const createUserToSignUp = () => {
 const signUp = async () => {
 
     const userToSignUp = createUserToSignUp();
-    const user = await fetch(`api/users`,
+    const response = await fetch(`api/users`,
         {
             method: 'POST',
             body: userToSignUp,
@@ -71,27 +71,20 @@ const signUp = async () => {
             }
         }
     );
-    console.log(user);
+    console.log(response);
     debugger;
     //const responseText = await user.text();
 
-    if (user.status == 201) {
-        const userToJson = await user.json();
+    if (response.status == 201) {
+        const userToJson = await response.json();
         saveUserInSessionStorage(userToJson);
-        alert('המשתמש נרשם בהצלחה');
+        alert('Registed successfully');
 
     }
-
-    if (user.status == 400/* && responseText == "Password isn't strong"*/) {
-        //const aaa = await user.text();
-        alert("Password isn't strong");
-    }
-    else {
-        if (user.status == 400) {
-            alert('requierd fields')
-        }
-    }
-   
+    else
+    if (response.status == 400) {
+        alert("Validation error occured");
+    }   
 
 }
 

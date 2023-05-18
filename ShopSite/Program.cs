@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Repositories;
 using Services;
-using ShopSite;
+using ShopSite.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,9 +30,12 @@ builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
+builder.Services.AddTransient<IRatingReposiory, RatingReposiory > ();
+builder.Services.AddTransient<IRatingService, RatingService>();
 
-builder.Services.AddDbContext<ShopDbContext>(option => option.UseSqlServer("Data Source=SRV2\\PUPILS;Integrated Security=True"));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddDbContext<ShopDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("ShopDB-SQL")));
 
 
 
@@ -45,13 +48,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseErrorHandlingMiddleware();
+app.UseRatingMiddleware(); 
 // Configure the HTTP request pipeline.
 app.UseStaticFiles();
+app.UsePageNotFoundMiddleware();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

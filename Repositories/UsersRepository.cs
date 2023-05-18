@@ -67,51 +67,14 @@ namespace Repositories
             await _shopDbContext.AddAsync(user);
             await _shopDbContext.SaveChangesAsync();
             return user;
-
-            //    int numberOfUsers = System.IO.File.ReadLines(filePath).Count();
-            //user.UserId = numberOfUsers + 1;
-            //string userJson = JsonSerializer.Serialize(user);
-            //await System.IO.File.AppendAllTextAsync(filePath, userJson + Environment.NewLine);
-            //return user;
         }
 
 
         public async Task<User> updateUser(int id, User userToUpdate)
         {
-
              _shopDbContext.Users.Update(userToUpdate);
             await _shopDbContext.SaveChangesAsync();
             return userToUpdate;
-
-
-
-
-            //        string textToReplace = string.Empty;
-            //    using (StreamReader reader = System.IO.File.OpenText(filePath))
-            //    {
-            //        string currentUserInFile;
-            //        while ((currentUserInFile = await reader.ReadLineAsync()) != null)
-            //        {
-
-            //            User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-            //            if (user.UserId == id)
-            //                textToReplace = currentUserInFile;
-            //        }
-            //    }
-
-            //    if (textToReplace != string.Empty)
-            //    {
-            //        string text = await System.IO.File.ReadAllTextAsync(filePath);
-            //        text = text.Replace(textToReplace, JsonSerializer.Serialize(userToUpdate));
-            //        await System.IO.File.WriteAllTextAsync(filePath, text);
-            //        return userToUpdate;
-            //    }
-
-            //    return null;
-            //}
-
-
-
         }
     }
 }

@@ -2,18 +2,18 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace ShopSite
+namespace ShopSite.Middlewares
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        ILogger<ErrorHandlingMiddleware> _logger; 
+        ILogger<ErrorHandlingMiddleware> _logger;
 
         public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             _next = next;
-            _logger = logger; 
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -23,10 +23,11 @@ namespace ShopSite
             {
                 await _next(httpContext);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogError($"An error caught in middleware {ex.Message}  {ex.StackTrace}");
                 httpContext.Response.StatusCode = 500;
-                await httpContext.Response.WriteAsync("Internal error in server"); 
+                await httpContext.Response.WriteAsync("Internal error in server");
 
 
 

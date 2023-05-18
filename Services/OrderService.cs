@@ -18,7 +18,7 @@ namespace Services
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
-            //_logger = logger;
+            _logger = logger;
         }
         private async Task<double> checkOrderSum(ICollection<OrderItem> orderItems)
         {
@@ -31,10 +31,10 @@ namespace Services
         {
 
             double totoalSum = await checkOrderSum(newOrder.OrderItems);
-            //if(totoalSum!= newOrder.OrderSum)
-            //    _logger.LogInformation("total sum != OrderSum")
+            if (totoalSum != (double)newOrder.OrderSum)
+                _logger.LogInformation("total sum != OrderSum");
             newOrder.OrderSum = (decimal)totoalSum;
-            newOrder.Date = DateTime.UtcNow;
+            newOrder.Date = DateTime.Now;
             return await _orderRepository.createOrder(newOrder);
         }
 
