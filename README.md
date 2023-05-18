@@ -1,4 +1,5 @@
 Shop Web Site in ASP.NET 7 API-based REST Architecture
+
 Welcome to our Shop Web Site project, built on ASP.NET 7 API-based REST Architecture. 
 This web site is designed to provide user-friendly shopping experience. The site has validation, security, and scalability features. 
 
@@ -17,4 +18,4 @@ The project provides Swagger for API documentation.
 Our Shop Web Site project is built with the latest technologies to provide a pleasant and secure shopping experience.
 If you have any questions or feedback, please feel free to contact us.
 
-Riki and Renana
+Riki and Renana😊
