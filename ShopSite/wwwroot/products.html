@@ -9,7 +9,7 @@
     <template id="temp-card">
         <div class="card">
             <div class="img-w">
-                <img src="tmp.jpg" alt="" style="width:100%">
+                <img src="tmp.jpg" alt="" style="width:300px" height="250px">
             </div>
             <h1></h1>
             <p class="price"></p>
@@ -85,19 +85,19 @@
             <input type="text" id="nameSearch" class="floatRight" placeholder="search by product name">
 
             <button class="floatRight" tabindex="0" onclick="filterProducts()">
-                <span class="header42"><img src="images/searchIcon.svg" alt="search icon"></span>
+                <span class="header42"><img src="images/searchIcon.svg" alt="search icon" class="searchIcon"></span>
             </button>
         </div>
         <div id="priceRangeFilter" class="filterBreak">
             <div><span id="counter">  </span> price:</div>
 
-            <input type="text" maxlength="9" id="minPrice" class="priceInputText">
-            <span class="priceCurrency">₪</span>
+            <input type="text" maxlength="9" id="minPrice" class="priceInputText" placeholder="min">
+            <span class="priceCurrency">$</span>
 
-            <input type="text" maxlength="9" id="maxPrice" class="priceInputText">
-            <span class="priceCurrency">₪</span>
+            <input type="text" maxlength="9" id="maxPrice" class="priceInputText" placeholder="max">
+            <span class="priceCurrency">$</span>
             <button onclick="filterProducts()">
-                <span><img src="images/searchIcon.svg" alt="search icon"></span>
+                <span><img src="images/searchIcon.svg" alt="search icon" class="searchIcon"></span>
             </button>
         </div>
     </div>

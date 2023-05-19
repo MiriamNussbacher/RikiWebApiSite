@@ -48,16 +48,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseErrorHandlingMiddleware();
-app.UseRatingMiddleware(); 
+
+//app.UseRatingMiddleware();
+
 // Configure the HTTP request pipeline.
 app.UseStaticFiles();
-app.UsePageNotFoundMiddleware();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UsePageNotFoundMiddleware();
 
 app.Run();

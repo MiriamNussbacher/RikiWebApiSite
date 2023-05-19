@@ -225,3 +225,7 @@ p.description {
         .pagination a:hover:not(.active) {
             background-color: #ddd;
         }
+.searchIcon{
+    height: 20px;
+        width: 20px
+}

@@ -1,6 +1,6 @@
 ﻿
 const drawCart = () => {
-    var cart = JSON.parse(localStorage.getItem('cart'));//arr of products
+    var cart = JSON.parse(localStorage.getItem('cart'));
     const template = document.getElementsByTagName("template")[0];
     if (cart != null) {
         cart.forEach(product => {
@@ -11,7 +11,6 @@ const drawCart = () => {
             clone.querySelector(".price").innerText = `${product.price}`;
             clone.querySelector(".expandoHeight").addEventListener('click', (e) => deleteProductFromCart(cart, product))
 
-            //clone.querySelector(".expandoHeight p").innerText = `${product.price * product.count}`;
 
 
             document.getElementsByTagName("tbody")[0].appendChild(clone);
@@ -59,7 +58,7 @@ document.getElementById("itemCount").innerText = 0
 
 
 const placeOrder = async() => { 
-    const cart = JSON.parse(localStorage.getItem('cart'));//arr of products
+    const cart = JSON.parse(localStorage.getItem('cart'));
 
     const orderItems = cart.map(product => { return { 'ProductId': product.productId, 'Quantity': product.count } })
 

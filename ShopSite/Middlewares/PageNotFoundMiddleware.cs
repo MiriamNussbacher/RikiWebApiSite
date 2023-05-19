@@ -21,7 +21,7 @@ namespace ShopSite.Middlewares
             if (httpContext.Response.StatusCode == 404)
             {
                 httpContext.Response.ContentType = "text/html";
-                await httpContext.Response.SendFileAsync("M:\\webApi\\ShopSite\\ShopSite\\wwwroot\\404.html");
+                await httpContext.Response.SendFileAsync("./wwwroot/404.html");
             }
 
 

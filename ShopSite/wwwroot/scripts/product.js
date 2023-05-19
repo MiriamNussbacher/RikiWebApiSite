@@ -2,7 +2,7 @@
 const addToCart = (product) => {
 
 
-    var oldCart = JSON.parse(localStorage.getItem('cart'));//arr of products
+    var oldCart = JSON.parse(localStorage.getItem('cart'));
     if (oldCart == null) localStorage.setItem('cart', JSON.stringify([{ ...product, 'count': 1 }]))
     else {
         var oldProduct = oldCart.find(item => item.productId == product.productId);
@@ -27,7 +27,7 @@ const drowProducts = (products) => {
         var clone = template.content.cloneNode(true);
         clone.querySelector(".card h1").innerText = `${product.name}`;
         clone.querySelector(".img-w img").src = `../images/${product.image}`;
-        clone.querySelector(".price").innerText = `${product.price} ₪`;
+        clone.querySelector(".price").innerText = `$ ${product.price} `;
         clone.querySelector(".description").innerText = `${product.description}`;
         clone.querySelector(".card button").addEventListener("click", () => addToCart(product))
 
@@ -99,7 +99,7 @@ function cleanScreen() {
 }
 
 const counterCartProducts = () => {
-    var oldCart = JSON.parse(localStorage.getItem('cart'));//arr of products
+    var oldCart = JSON.parse(localStorage.getItem('cart'));
     const counter = oldCart.reduce((sum, product) => { return sum + product.count }, 0)
     document.getElementById('ItemsCountText').innerText = counter; 
 }
