@@ -9,15 +9,15 @@ The client and the server-side have validation for security and Password strengt
 The project is built in layers, layers are divided into controllers, services, and repositories, 
 the Communication between the layers is conducted by dependency injection.
 DTO-Data Transfer Object, for preventing circular dependency and encapsulation between layers.
-Asynchronous programming with async await for scalability
+Asynchronous programming with async await for scalability.
 For error handling support there is a middleware that catch and handle the errors.
-The project keeping a log of events that occur in  the application , such as problems, errors or just information ,
+The project keeps a log of events that occur in  the application , such as problems, errors or just information.
 for error reporting it uses Email notification
 The project provides Swagger for API documentation.
 
 The client is written on HTML5, CSS, JS. 
 
-The project implements clean code principles. 
+The project is written using clean code principles. 
 
 Our Shop Web Site project is built with the latest technologies to provide a pleasant and secure shopping experience.
 If you have any questions or feedback, please feel free to contact us.
