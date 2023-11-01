@@ -14,7 +14,7 @@ namespace ShopSite
             CreateMap<ProductDTO, Product>();
             CreateMap<Category, CategoryDTO>().ReverseMap();
            
-            CreateMap<Order, OrderDTO>().ReverseMap();
+            CreateMap<Order, OrderDTO>().ReverseMap();//test
 
 
             CreateMap<OrderItem, OrderItemDTO>().ReverseMap();
